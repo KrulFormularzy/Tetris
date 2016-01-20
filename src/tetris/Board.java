@@ -314,19 +314,17 @@ public class Board extends JPanel implements ActionListener {
                 case KeyEvent.VK_DOWN:
                     rot = new RotateRight();
                     Shape r = rot.rotate();
-                    tryMove(curPiece.r, curX, curY);
+                    tryMove(curPiece.rotateRight(), curX, curY);
                     break;
                 case KeyEvent.VK_UP:
                     rot = new RotateLeft();
-                    Shape l = l.rotateLeft();
+                    Shape l = rot.rotate();
                     tryMove(curPiece.rotateLeft(), curX, curY);
                     break;
                 case KeyEvent.VK_SPACE: {
                     try {
                         dropDown();
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
+                    } catch (ClassNotFoundException | SQLException ex) {
                         Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
