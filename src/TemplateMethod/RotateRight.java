@@ -3,29 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris;
-
+package TemplateMethod;
+import tetris.Shape;
+import TemplateMethod.AbstractRotate;
+import tetris.Shape;
 import tetris.Shape.Tetrominoes;
-
 /**
  *
  * @author Patryk
  */
-public class RotateLeft extends AbstractRotate {
-   
+public class RotateRight extends AbstractRotate {
     
     
-   @Override
-   Shape rotaterotate() {
+  @Override
+   Shape rotaterotate(Tetrominoes pieceShape,Shape sh) {
        if (pieceShape == Tetrominoes.SquareShape)
-            return this;
+            return sh;
 
         Shape result = new Shape();
         result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
-            result.setX(i, y(i));
-            result.setY(i, -x(i));
+            result.setX(i, -sh.y(i));
+            result.setY(i, sh.x(i));
         }
         return result;
    }

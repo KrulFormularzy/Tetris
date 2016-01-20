@@ -5,6 +5,7 @@
  */
 package tetris;
 
+import TemplateMethod.AbstractRotate;
 import Konto.kontoView;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -312,13 +313,13 @@ public class Board extends JPanel implements ActionListener {
                     tryMove(curPiece, curX + 1, curY);
                     break;
                 case KeyEvent.VK_DOWN:
-                    rot = new RotateRight();
-                    Shape r = rot.rotate();
+//                    rot = new RotateRight();
+//                    Shape r = rot.rotate();
                     tryMove(curPiece.rotateRight(), curX, curY);
                     break;
                 case KeyEvent.VK_UP:
-                    rot = new RotateLeft();
-                    Shape l = rot.rotate();
+//                    rot = new RotateLeft();
+//                    Shape l = rot.rotate();
                     tryMove(curPiece.rotateLeft(), curX, curY);
                     break;
                 case KeyEvent.VK_SPACE: {
