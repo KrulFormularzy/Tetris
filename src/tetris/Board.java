@@ -5,6 +5,12 @@
  */
 package tetris;
 
+import Difficulty.DifficultContext;
+import Difficulty.Difficulty;
+import Difficulty.LevelFour;
+import Difficulty.LevelOne;
+import Difficulty.LevelThree;
+import Difficulty.LevelTwo;
 import TemplateMethod.AbstractRotate;
 import log.kontoView;
 import java.awt.Color;
@@ -51,9 +57,9 @@ public class Board extends JPanel implements ActionListener {
         
         setFocusable(true);
         curPiece = new Shape();
-        timer = new Timer(400, this);
+        timer = new Timer(800, this);
         timer.start();
-
+        
         statusbar = parent.getStatusBar();
 
         board = new Tetrominoes[BoardWidth * BoardHeight];
@@ -117,6 +123,8 @@ public class Board extends JPanel implements ActionListener {
             statusbar.setText("Pauza");
         } else {
             timer.start();
+            
+
             statusbar.setText(String.valueOf(numLinesRemoved*10));
         }
         repaint();
@@ -251,6 +259,24 @@ public class Board extends JPanel implements ActionListener {
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
             statusbar.setText(String.valueOf(numLinesRemoved*10));
+            int dankmeme = Integer.parseInt(statusbar.getText());
+            if((dankmeme > 50) && (dankmeme <= 100)){
+                DifficultContext context = new DifficultContext(new LevelOne());
+                timer.setDelay(context.executeChange());
+            }else if ((dankmeme > 100) && (dankmeme <= 150)){
+                DifficultContext context = new DifficultContext(new LevelTwo());
+                timer.setDelay(context.executeChange());
+            }else if ((dankmeme > 150) && (dankmeme <= 200)){
+                DifficultContext context = new DifficultContext(new LevelThree());
+                timer.setDelay(context.executeChange());
+            }else if ((dankmeme > 200) && (dankmeme <= 250)){
+                DifficultContext context = new DifficultContext(new LevelFour());
+                timer.setDelay(context.executeChange());
+            }
+            
+            //timer.setDelay(timer.getDelay()-100);
+            System.out.println("DILEY "+ timer.getDelay());
+            
             isFallingFinished = true;
             curPiece.setShape(Tetrominoes.NoShape);
             repaint();
