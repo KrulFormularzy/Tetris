@@ -18,7 +18,7 @@ import globalcrap.User;
  *
  * @author Patryk
  */
-public class LogAuth {
+public class LogAuth implements FasadaInterfaceDB {
     
     private String dbUserID;
     private String dbLogin;
@@ -29,8 +29,9 @@ public class LogAuth {
         this.dbLogin = "";
         this.dbPassword = "";
     }
-
-    public String authentication(String login, char[] password) throws SQLException, ClassNotFoundException{
+    
+    @Override
+    public String databasetalk(String login, char[] password) throws SQLException, ClassNotFoundException{
             
             String pass = new String(password);
             Class.forName("org.apache.derby.jdbc.ClientDriver");

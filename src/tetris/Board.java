@@ -6,7 +6,7 @@
 package tetris;
 
 import TemplateMethod.AbstractRotate;
-import Konto.kontoView;
+import log.kontoView;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -68,17 +68,13 @@ public class Board extends JPanel implements ActionListener {
             isFallingFinished = false;
             try {
                 newPiece();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             try {
                 oneLineDown();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

@@ -5,8 +5,6 @@
  */
 package log;
 
-import Konto.kontoView;
-import Konto.register;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -72,7 +70,11 @@ public class logView extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 try {
                     LogAuth logauth = new LogAuth();
-                    String name = logauth.authentication(userText.getText(), passwordText.getPassword());
+                    
+                    FacadeDBClass fasatka = new FacadeDBClass();
+                    
+                    String name = fasatka.logIn(userText.getText(), passwordText.getPassword());
+//                    String name = logauth.authentication(userText.getText(), passwordText.getPassword());
                     if (name != null) {
                         kontoView account = new kontoView(name);
 
@@ -95,14 +97,16 @@ public class logView extends JDialog {
         });
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (userText.getText() == null || passwordText.getPassword() == null) {
+                if (userText.getText() != null && passwordText.getPassword() != null) {
+                    
+                    FacadeDBClass fasatka = new FacadeDBClass();
+                    
                     try {
-                        register reg = new register(userText.getText(), passwordText.getPassword());
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(logView.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
+                        String name = fasatka.regIN(userText.getText(), passwordText.getPassword());
+                    } catch (SQLException | ClassNotFoundException ex) {
                         Logger.getLogger(logView.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
                     passwordText.setText("");
                     userText.setText("Rejestracja Pomyslna");
                 } else {
