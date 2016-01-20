@@ -5,6 +5,8 @@
  */
 package tetris;
 
+import Shaping.DreamCompany;
+import Shaping.Shaping;
 import TemplateMethod.RotateRight;
 import TemplateMethod.RotateLeft;
 import TemplateMethod.AbstractRotate;
@@ -18,7 +20,7 @@ public class Shape {
                TShape, SquareShape, LShape, MirroredLShape };
 
     public Tetrominoes pieceShape;
-    private int coords[][];
+    public int coords[][];
     private int[][][] coordsTable;
     
     public Tetrominoes getpieceShape(){
@@ -65,7 +67,10 @@ public class Shape {
         Random r = new Random();
         int x = Math.abs(r.nextInt()) % 7 + 1;
         Tetrominoes[] values = Tetrominoes.values(); 
-        setShape(values[x]);
+        DreamCompany factory = new DreamCompany();
+        Shaping factoryShape = factory.getShape(x);
+        factoryShape.rezanie(values[x], this);
+        //setShape(values[x]);
     }
 
     public int minX()
