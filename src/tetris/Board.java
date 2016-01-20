@@ -258,6 +258,7 @@ public class Board extends JPanel implements ActionListener {
 
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
+         
             statusbar.setText(String.valueOf(numLinesRemoved*10));
             int dankmeme = Integer.parseInt(statusbar.getText());
             if((dankmeme > 50) && (dankmeme <= 100)){
