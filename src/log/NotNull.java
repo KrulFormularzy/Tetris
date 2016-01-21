@@ -17,6 +17,7 @@ public class NotNull extends NullPointerAbstr {
    }
     @Override
    public String getName() {
+       
        System.out.println("Git logowanie");
       return name;
    }
