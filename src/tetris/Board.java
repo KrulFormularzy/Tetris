@@ -49,23 +49,19 @@ public class Board extends JPanel implements ActionListener {
     Shape curPiece;
     Tetrominoes[] board;
 
-    
-    
-    
     public Board(Mainthing parent) {
 
-        
         setFocusable(true);
         curPiece = new Shape();
         timer = new Timer(800, this);
         timer.start();
-        
+
         statusbar = parent.getStatusBar();
 
         board = new Tetrominoes[BoardWidth * BoardHeight];
         addKeyListener(new TAdapter());
         clearBoard();
-        
+
     }
 
     @Override
@@ -123,9 +119,8 @@ public class Board extends JPanel implements ActionListener {
             statusbar.setText("Pauza");
         } else {
             timer.start();
-            
 
-            statusbar.setText(String.valueOf(numLinesRemoved*10));
+            statusbar.setText(String.valueOf(numLinesRemoved * 10));
         }
         repaint();
     }
@@ -204,13 +199,13 @@ public class Board extends JPanel implements ActionListener {
             curPiece.setShape(Tetrominoes.NoShape);
             timer.stop();
             isStarted = false;
-            
+
             scoredb object = scoredb.getInstance();
-            
+
             object.scoredbsave(statusbar.getText());
             //KURWA JAK GO SKASOWAC
             kontoView acc = new kontoView(User.user);
-            
+
         }
     }
 
@@ -258,26 +253,26 @@ public class Board extends JPanel implements ActionListener {
 
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
-         
-            statusbar.setText(String.valueOf(numLinesRemoved*10));
+
+            statusbar.setText(String.valueOf(numLinesRemoved * 10));
             int dankmeme = Integer.parseInt(statusbar.getText());
-            if((dankmeme > 50) && (dankmeme <= 100)){
+            if ((dankmeme > 50) && (dankmeme <= 100)) {
                 DifficultContext context = new DifficultContext(new LevelOne());
                 timer.setDelay(context.executeChange());
-            }else if ((dankmeme > 100) && (dankmeme <= 150)){
+            } else if ((dankmeme > 100) && (dankmeme <= 150)) {
                 DifficultContext context = new DifficultContext(new LevelTwo());
                 timer.setDelay(context.executeChange());
-            }else if ((dankmeme > 150) && (dankmeme <= 200)){
+            } else if ((dankmeme > 150) && (dankmeme <= 200)) {
                 DifficultContext context = new DifficultContext(new LevelThree());
                 timer.setDelay(context.executeChange());
-            }else if ((dankmeme > 200) && (dankmeme <= 250)){
+            } else if ((dankmeme > 200) && (dankmeme <= 250)) {
                 DifficultContext context = new DifficultContext(new LevelFour());
                 timer.setDelay(context.executeChange());
             }
-            
+
             //timer.setDelay(timer.getDelay()-100);
-            System.out.println("DILEY "+ timer.getDelay());
-            
+            System.out.println("DILEY " + timer.getDelay());
+
             isFallingFinished = true;
             curPiece.setShape(Tetrominoes.NoShape);
             repaint();
@@ -311,12 +306,11 @@ public class Board extends JPanel implements ActionListener {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            
+
             if (!isStarted || curPiece.getShape() == Tetrominoes.NoShape) {
                 return;
             }
             int keycode = e.getKeyCode();
-            
 
             if (keycode == 'p' || keycode == 'P') {
                 pause();
@@ -356,9 +350,7 @@ public class Board extends JPanel implements ActionListener {
                 case 'd': {
                     try {
                         oneLineDown();
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
+                    } catch (ClassNotFoundException | SQLException ex) {
                         Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -366,9 +358,7 @@ public class Board extends JPanel implements ActionListener {
                 case 'D': {
                     try {
                         oneLineDown();
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
+                    } catch (ClassNotFoundException | SQLException ex) {
                         Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }

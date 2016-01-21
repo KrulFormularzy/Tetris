@@ -26,6 +26,6 @@ public class register implements FasadaInterfaceDB{
             String query = "INSERT INTO users (login,password) values ('"+login+"','"+passo+"')";
             Statement statement = con.createStatement();
             statement.executeUpdate(query);
-            return "BezSensu";
+            return "BezSensu";  //The unseen memes are the deadliest 
     }
 }

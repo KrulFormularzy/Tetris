@@ -44,12 +44,19 @@ public class LogAuth implements FasadaInterfaceDB {
                 dbLogin = rs.getString("login");
                 dbPassword = rs.getString("password");
             }
+            
+            
             User.user = dbLogin;
-            if (dbUserID != "") {
-                return dbLogin;
-            } else {
-                return null;
-            }
+            
+            NullPointerAbstr chk = FactoryOfNull.getLogin(dbUserID, dbLogin);
+            
+            return chk.getName();
+            
+//            if (dbUserID != "") {
+//                return dbLogin;
+//            } else {
+//                return null;
+//            }
 
     }
 
