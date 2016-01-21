@@ -49,6 +49,8 @@ public class Board extends JPanel implements ActionListener {
     Shape curPiece;
     Tetrominoes[] board;
 
+    Context contextStates = new Context();
+
     public Board(Mainthing parent) {
 
         setFocusable(true);
@@ -99,6 +101,11 @@ public class Board extends JPanel implements ActionListener {
             return;
         }
 
+        StartGame startState = new StartGame();
+        startState.doAction(contextStates);
+
+        System.out.println(contextStates.getState().toString());
+
         isStarted = true;
         isFallingFinished = false;
         numLinesRemoved = 0;
@@ -116,6 +123,12 @@ public class Board extends JPanel implements ActionListener {
         isPaused = !isPaused;
         if (isPaused) {
             timer.stop();
+            
+            PausedGame pauseState = new PausedGame();
+            pauseState.doAction(contextStates);
+
+            System.out.println(contextStates.getState().toString());
+            
             statusbar.setText("Pauza");
         } else {
             timer.start();
@@ -202,6 +215,11 @@ public class Board extends JPanel implements ActionListener {
 
             scoredb object = scoredb.getInstance();
 
+            EndGame stopState = new EndGame();
+            stopState.doAction(contextStates);
+
+            System.out.println(contextStates.getState().toString());
+            
             object.scoredbsave(statusbar.getText());
             //KURWA JAK GO SKASOWAC
             kontoView acc = new kontoView(User.user);
